@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import ResumeGenerator from '@/components/ResumeGenerator';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -10,11 +10,6 @@ import { Button } from '@/components/ui/button';
 const Index: React.FC = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [bulkCount, setBulkCount] = useState(1);
-
-  // Show dialog on initial load
-  useEffect(() => {
-    setShowDialog(true);
-  }, []);
 
   // Handle dialog submission
   const handleSubmit = () => {
@@ -54,7 +49,7 @@ const Index: React.FC = () => {
           </div>
         </DialogContent>
       </Dialog>
-      <ResumeGenerator initialBulkCount={bulkCount} />
+      <ResumeGenerator initialBulkCount={bulkCount} onGenerateClick={() => setShowDialog(true)} />
     </Layout>
   );
 };

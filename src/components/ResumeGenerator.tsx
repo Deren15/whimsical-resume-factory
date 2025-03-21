@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import PrimaryButton from './PrimaryButton';
@@ -8,9 +7,13 @@ import { fetchRandomUserData, generatePdf, ResumeData } from '@/utils/resumeGene
 
 interface ResumeGeneratorProps {
   initialBulkCount?: number;
+  onGenerateClick?: () => void;
 }
 
-const ResumeGenerator: React.FC<ResumeGeneratorProps> = ({ initialBulkCount = 1 }) => {
+const ResumeGenerator: React.FC<ResumeGeneratorProps> = ({ 
+  initialBulkCount = 1,
+  onGenerateClick
+}) => {
   const { toast } = useToast();
   const [resumeList, setResumeList] = useState<ResumeData[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -130,7 +133,7 @@ const ResumeGenerator: React.FC<ResumeGeneratorProps> = ({ initialBulkCount = 1 
       
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up">
         <PrimaryButton 
-          onClick={generateResumes} 
+          onClick={onGenerateClick ? onGenerateClick : generateResumes}
           loading={isLoading}
           disabled={isLoading || isPdfGenerating}
           className="w-full sm:w-auto"
